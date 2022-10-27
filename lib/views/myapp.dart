@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:PetFoodPlanner/views/my_homepage.dart';
+import 'package:PetFoodPlanner/views/cadastro_pet.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
       initialRoute: MyHomePage.nomeRota,
       routes: {
         MyHomePage.nomeRota: ((context) => const MyHomePage()),
-        // CadastrarPessoa.nomeRota: ((context) => const CadastrarPessoa()),
-        // DetalhesAniversario.nomeRota: ((context) => DetalhesAniversario()),
+        CadastrarPet.nomeRota: ((context) => const CadastrarPet()),
+        // DetalhesPet.nomeRota: ((context) => DetalhesPet()),
       },
     );
   }
