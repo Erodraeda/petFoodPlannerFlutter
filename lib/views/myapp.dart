@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zzzzzzzzzzz/views/cadastrar_pessoas.dart';
-import 'package:zzzzzzzzzzz/views/detalhes_aniversario.dart';
-import 'package:zzzzzzzzzzz/views/my_homepage.dart';
+import 'package:PetFoodPlanner/views/my_homepage.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,13 +10,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pet Food Planner',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       initialRoute: MyHomePage.nomeRota,
       routes: {
         MyHomePage.nomeRota: ((context) => const MyHomePage()),
-        CadastrarPessoa.nomeRota: ((context) => const CadastrarPessoa()),
-        DetalhesAniversario.nomeRota: ((context) => DetalhesAniversario()),
+        // CadastrarPessoa.nomeRota: ((context) => const CadastrarPessoa()),
+        // DetalhesAniversario.nomeRota: ((context) => DetalhesAniversario()),
       },
     );
   }
