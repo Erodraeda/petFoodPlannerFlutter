@@ -1,4 +1,4 @@
-package com.example.zzzzzzzzzzz
+package com.example.PetFoodPlanner
 
 import io.flutter.embedding.android.FlutterActivity
 

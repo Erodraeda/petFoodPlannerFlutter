@@ -1,6 +1,6 @@
 {
-    "name": "zzzzzzzzzzz",
-    "short_name": "zzzzzzzzzzz",
+    "name": "PetFoodPlanner",
+    "short_name": "PetFoodPlanner",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
