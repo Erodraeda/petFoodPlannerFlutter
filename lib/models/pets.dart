@@ -6,7 +6,6 @@ class Pets {
   bool? dieta;
   List<String>? doencas;
   String? racao;
-  int? porcoes;
   int? tamanhoPorcoes;
 
   Pets();
@@ -19,7 +18,6 @@ class Pets {
     dieta = map['dieta'];
     doencas = map['doencas'];
     racao = map['racao'];
-    porcoes = map['porcoes'];
     tamanhoPorcoes = map['tamanhoPorcoes'];
   }
 
@@ -31,7 +29,6 @@ class Pets {
       'dieta': dieta,
       'doencas': doencas,
       'racao': racao,
-      'porcoes': porcoes,
       'tamanhoPorcoes': tamanhoPorcoes,
     };
     if (id != null) {
@@ -42,7 +39,6 @@ class Pets {
 
   @override
   String toString() {
-    return ("Id: $id, Nome: $nome, Peso: $peso, Idade: $idade, Dieta: $dieta, Doenças: $doencas, Ração: $racao, Porções: $porcoes, Tamanho das Porções: $tamanhoPorcoes");
+    return ("Id: $id, Nome: $nome, Peso: $peso, Idade: $idade, Dieta: $dieta, Doenças: $doencas, Ração: $racao, Tamanho das Porções: $tamanhoPorcoes");
   }
-
 }
