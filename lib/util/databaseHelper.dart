@@ -6,7 +6,8 @@ import 'package:path_provider/path_provider.dart';
 class DatabaseHelper {
   static const _databaseName = "ExemploDB.db";
   static const _databaseVersion = 1;
-  static const table = 'TBPessoa';
+  static const table = 'pets';
+  static const table2 = 'alimentacao';
 
   // torna esta classe singleton
   DatabaseHelper._privateConstructor(); //Construtor privado
@@ -36,9 +37,23 @@ class DatabaseHelper {
           CREATE TABLE $table (
             id INTEGER PRIMARY KEY,
             nome TEXT NOT NULL,
-            email TEXT NOT NULL,
-            aniversario TEXT NOT NULL,
-            categoria TEXT NOT NULL
+            peso REAL NOT NULL,
+            idade INTEGER NOT NULL,
+            dieta INTEGER NOT NULL,
+            doencas TEXT,
+            racao TEXT,
+            tamanhoPorcoes REAL
+          )
+          ''');
+    await db.execute('''
+          CREATE TABLE $table2 (
+            id INTEGER PRIMARY KEY,
+            pet_id INTEGER,
+            data_alimentacao TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            alimentacao1 INTEGER DEFAULT 0,
+            alimentacao2 INTEGER DEFAULT 0,
+            alimentacao3 INTEGER DEFAULT 0,
+            FOREIGN KEY(pet_id) REFERENCES $table(id)
           )
           ''');
   }
