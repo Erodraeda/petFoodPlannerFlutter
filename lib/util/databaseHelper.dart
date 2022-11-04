@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
-  static const _databaseName = "ExemploDB.db";
+  static const _databaseName = "petFoodPlanner.db";
   static const _databaseVersion = 1;
   static const userTable = 'users';
   static const table = 'pets';
@@ -26,8 +26,10 @@ class DatabaseHelper {
 
   // abre o banco de dados e o cria se ele não existir
   _initDatabase() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, _databaseName);
+    // Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    // String path = join(documentsDirectory.path, _databaseName);
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, _databaseName);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
