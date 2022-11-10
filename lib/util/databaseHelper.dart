@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+
+import 'package:mysql1/mysql1.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,10 +31,16 @@ class DatabaseHelper {
   _initDatabase() async {
     // Directory documentsDirectory = await getApplicationDocumentsDirectory();
     // String path = join(documentsDirectory.path, _databaseName);
-    var databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+    // var databasesPath = await getDatabasesPath();
+    // String path = join(databasesPath, _databaseName);
+    // return await openDatabase(path,
+    //     version: _databaseVersion, onCreate: _onCreate);
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: 'petfoodplanner-db00008295.mdb0002659.db.skysql.net',
+        port: 5009,
+        user: 'DB00008295',
+        password: '1234',
+        db: 'database_name'));
   }
 
   // Código SQL para criar o banco de dados e a tabela
