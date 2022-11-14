@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 class DatabaseHelper {
   static const _databaseName = "petFoodPlanner.db";
   static const _databaseVersion = 1;
-  static const userTable = 'users';
   static const table = 'pets';
   static const table2 = 'alimentacao';
 
@@ -37,12 +36,6 @@ class DatabaseHelper {
   // Código SQL para criar o banco de dados e a tabela
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE $userTable (
-            id INTEGER PRIMARY KEY,
-            nome TEXT NOT NULL
-          )
-          ''');
-    await db.execute('''
           CREATE TABLE $table (
             id INTEGER PRIMARY KEY,
             nome TEXT NOT NULL,
@@ -51,9 +44,7 @@ class DatabaseHelper {
             dieta INTEGER NOT NULL,
             doencas TEXT,
             racao TEXT,
-            tamanhoPorcoes REAL,
-            user_id INTEGER,
-            FOREIGN KEY(user_id) REFERENCES $userTable(id)
+            tamanhoPorcoes REAL
           )
           ''');
     await db.execute('''
