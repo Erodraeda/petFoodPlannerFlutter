@@ -42,7 +42,6 @@ class DatabaseHelper {
             peso REAL NOT NULL,
             idade INTEGER NOT NULL,
             dieta INTEGER NOT NULL,
-            doencas TEXT,
             racao TEXT,
             tamanhoPorcoes REAL
           )
