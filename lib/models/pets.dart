@@ -1,9 +1,9 @@
 class Pets {
   int? id;
   String? nome;
-  int? peso;
-  String? idade;
-  bool? dieta;
+  double? peso;
+  int? idade;
+  int? dieta;
   List<String>? doencas;
   String? racao;
   int? tamanhoPorcoes;
