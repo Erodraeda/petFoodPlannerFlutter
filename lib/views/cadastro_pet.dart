@@ -63,19 +63,19 @@ class _CadastrarPetState extends State<CadastrarPet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: _buildMenu(),
-      appBar: AppBar(
-        title: const Text("Pet Food Planner - Cadastro"),
-      ),
-      body: SingleChildScrollView(
-        /*child: Container(
-          margin: const EdgeInsets.all(15.0),*/
-        child: Form(
-          key: _formKey,
-          child: _formUI(),
+        drawer: _buildMenu(),
+        appBar: AppBar(
+          title: const Text("Pet Food Planner - Cadastro"),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(15.0),
+            child: Form(
+              key: _formKey,
+              child: _formUI(),
+            ),
+          ),
+        ));
   }
 
   Widget _formUI() {

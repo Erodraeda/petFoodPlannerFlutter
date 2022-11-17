@@ -25,10 +25,8 @@ class DatabaseHelper {
 
   // abre o banco de dados e o cria se ele não existir
   _initDatabase() async {
-    // Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    // String path = join(documentsDirectory.path, _databaseName);
-    var databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, _databaseName);
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
