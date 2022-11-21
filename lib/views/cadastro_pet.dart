@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:PetFoodPlanner/views/detalhes_pet.dart';
 import 'package:flutter/material.dart';
 import 'package:PetFoodPlanner/models/pets.dart';
 import 'package:PetFoodPlanner/views/myapp.dart';
@@ -104,7 +105,7 @@ class _CadastrarPetState extends State<CadastrarPet> {
           maxLength: 10,
         ),
         DropdownButtonFormField(
-          value: dieta,
+          value: dieta!,
           onChanged: (int? newValue) {
             setState(() {
               pet?.dieta = newValue!;
@@ -114,7 +115,7 @@ class _CadastrarPetState extends State<CadastrarPet> {
         ),
         TextFormField(
           controller: controllerRacao,
-          decoration: const InputDecoration(hintText: 'Racao'),
+          decoration: const InputDecoration(hintText: 'Ração'),
           maxLength: 30,
         ),
         const SizedBox(height: 15.0),
@@ -162,17 +163,12 @@ class _CadastrarPetState extends State<CadastrarPet> {
           ListTile(
               title: Text('Detalhes dos seus pets!'),
               onTap: () {
-                // Navigator.pushNamed(context, CadastrarPet.nomeRota);
+                Navigator.pushNamed(context, DetalhesPet.nomeRota);
               }),
           ListTile(
               title: Text('Cadastre mais pets!'),
               onTap: () {
                 Navigator.pushNamed(context, CadastrarPet.nomeRota);
-              }),
-          ListTile(
-              title: Text('Configure os horários de alimentação!'),
-              onTap: () {
-                // Navigator.pushNamed(context, CadastrarPessoa.nomeRota);
               }),
         ],
       ),
