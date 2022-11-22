@@ -85,6 +85,18 @@ class DatabaseHelper {
           INSERT INTO $table (id, nome, peso, idade, dieta, racao, tamanhoPorcoes)
             VALUES (3, 'Cheddar', 3.8, 1, 0, 'Golden', 63)
           ''');
+    await db.execute('''
+          INSERT INTO $table2 (pet_id, alimentacao1, alimentacao2, alimentacao3)
+            VALUES (1, 1, 0, 0)
+          ''');
+    await db.execute('''
+          INSERT INTO $table2 (pet_id, alimentacao1, alimentacao2, alimentacao3)
+            VALUES (2, 1, 0, 1)
+          ''');
+    await db.execute('''
+          INSERT INTO $table2 (pet_id, alimentacao1, alimentacao2, alimentacao3)
+            VALUES (3, 1, 1, 0)
+          ''');
   }
 
   // métodos Helper
@@ -107,6 +119,11 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await instance.database;
     return await db.query(table);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllFeedingRows() async {
+    Database db = await instance.database;
+    return await db.query(table2);
   }
 
   // Todos os métodos : inserir, consultar, atualizar e excluir,
@@ -134,7 +151,7 @@ class DatabaseHelper {
   Future<int> updateFeeding(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row['id'];
-    return await db.update(table, row, where: 'id = ?', whereArgs: [id]);
+    return await db.update(table2, row, where: 'id = ?', whereArgs: [id]);
   }
 
   // Exclui a linha especificada pelo id. O número de linhas afetadas é
