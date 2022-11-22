@@ -5,9 +5,8 @@ import 'package:PetFoodPlanner/views/myapp.dart';
 import 'package:PetFoodPlanner/views/cadastro_pet.dart';
 import 'package:PetFoodPlanner/views/detalhes_pet.dart';
 import 'package:PetFoodPlanner/models/pets.dart';
+import 'package:PetFoodPlanner/models/alimentacao.dart';
 import 'package:PetFoodPlanner/util/databaseHelper.dart';
-
-import '../models/alimentacao.dart';
 
 class MyHomePage extends StatefulWidget {
   static const nomeRota = '/myhomepage';
@@ -29,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _fillLists();
+
     return Scaffold(
         drawer: _buildMenu(),
         appBar: AppBar(
@@ -90,11 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           value: isChecked1[index] ??= true,
                           onChanged: (newValue) async {
                             setState(() => isChecked1[index] = newValue!);
-                            _inserir(pet, 1);
+                            _inserir(
+                                pet, 1, ((isChecked1[index] == false) ? 0 : 1));
                           },
                           title: Text(
                             'Primeira refeição',
                           ),
+                          subtitle: Text('Porção: ${pet.tamanhoPorcoes}g'),
                           tileColor: Color(0xFFF5F5F5),
                           dense: false,
                           controlAffinity: ListTileControlAffinity.trailing,
@@ -108,11 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           value: isChecked2[index] ??= true,
                           onChanged: (newValue) async {
                             setState(() => isChecked2[index] = newValue!);
-                            _inserir(pet, 2);
+                            _inserir(
+                                pet, 2, ((isChecked2[index] == false) ? 0 : 1));
                           },
                           title: Text(
                             'Segunda refeição',
                           ),
+                          subtitle: Text('Porção: ${pet.tamanhoPorcoes}g'),
                           tileColor: Color(0xFFF5F5F5),
                           dense: false,
                           controlAffinity: ListTileControlAffinity.trailing,
@@ -126,11 +131,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           value: isChecked3[index] ??= true,
                           onChanged: (newValue) async {
                             setState(() => isChecked3[index] = newValue!);
-                            _inserir(pet, 3);
+                            _inserir(
+                                pet, 3, ((isChecked3[index] == false) ? 0 : 1));
                           },
                           title: Text(
                             'Terceira refeição',
                           ),
+                          subtitle: Text('Porção: ${pet.tamanhoPorcoes}g'),
                           tileColor: Color(0xFFF5F5F5),
                           dense: false,
                           controlAffinity: ListTileControlAffinity.trailing,
@@ -169,29 +176,72 @@ class _MyHomePageState extends State<MyHomePage> {
     return list!;
   }
 
-  _inserir(Pets pet, int noAlimentacao) async {
+  _inserir(Pets pet, int noAlimentacao, int value) async {
     var db = DatabaseHelper.instance;
     var result = await db.queryFeedingRow(pet.id!);
 
-    int? alimentacao1 = 0;
-    int? alimentacao2 = 0;
-    int? alimentacao3 = 0;
+    int? alimentacao1 =
+        (result.isEmpty == false) ? result[0]['alimentacao1'] : 0;
+    int? alimentacao2 =
+        (result.isEmpty == false) ? result[0]['alimentacao2'] : 0;
+    int? alimentacao3 =
+        (result.isEmpty == false) ? result[0]['alimentacao3'] : 0;
 
-    if (noAlimentacao == 1) alimentacao1 = 1;
-    if (noAlimentacao == 2) alimentacao2 = 1;
-    if (noAlimentacao == 3) alimentacao3 = 1;
+    if (noAlimentacao == 1) alimentacao1 = value;
+    if (noAlimentacao == 2) alimentacao2 = value;
+    if (noAlimentacao == 3) alimentacao3 = value;
 
     List<Pets>? list =
         result.isNotEmpty ? result.map((c) => Pets.fromMap(c)).toList() : null;
 
-    Alimentacao alimentacao = Alimentacao(
-        pet.id!, DateTime.now(), alimentacao1, alimentacao2, alimentacao3);
+    Alimentacao alimentacao = Alimentacao.withA(
+        pet.id!,
+        DateTime.now().toString(),
+        alimentacao1,
+        alimentacao2,
+        alimentacao3,
+        (result.isEmpty == false) ? result[0]['id'] : null);
+
+    List<Alimentacao>? listFeeding = result.isNotEmpty
+        ? result.map((c) => Alimentacao.fromMap(c)).toList()
+        : null;
 
     Map<String, dynamic> row = alimentacao.toMap();
 
-    if (list == null) {
+    if (result.isEmpty == true) {
       db.insertFeeding(row);
+    } else {
+      db.updateFeeding(row);
     }
+  }
+
+  _fillLists() async {
+    var feeding = await _getFeeding();
+
+    int i = 0;
+
+    for (var feed in feeding) {
+      bool bool1 = feed['alimentacao1'] == 0 ? false : true;
+      bool bool2 = feed['alimentacao2'] == 0 ? false : true;
+      bool bool3 = feed['alimentacao3'] == 0 ? false : true;
+
+      isChecked1[i] = bool1;
+      isChecked2[i] = bool2;
+      isChecked3[i] = bool3;
+
+      i++;
+    }
+  }
+
+  _getFeeding() async {
+    var db = DatabaseHelper.instance;
+    var result = await db.queryAllFeedingRows();
+
+    List<Alimentacao>? list = result.isNotEmpty
+        ? result.map((c) => Alimentacao.fromMap(c)).toList()
+        : null;
+
+    return result;
   }
 
   Widget _buildMenu() {
