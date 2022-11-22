@@ -57,6 +57,8 @@ class _DetalhesPetState extends State<DetalhesPet> {
         children: [
           Expanded(
             child: Card(
+              elevation: 5,
+              shadowColor: Colors.deepPurple,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               color: Color(0xFFF5F5F5),
               child: Row(
@@ -126,63 +128,6 @@ class _DetalhesPetState extends State<DetalhesPet> {
         ],
       ),
     );
-
-    // Row(children: [
-    //   Expanded(
-    //       child: ListTile(
-    //     title: Text(pet.nome!),
-    //   )),
-    //   Expanded(
-    //     child: Container(
-    //         height: 120,
-    //         width: 50,
-    //         decoration: BoxDecoration(
-    //             border: Border.all(color: Colors.deepPurple, width: 3.0)),
-    //         child: Row(
-    //           children: [
-    //             Text('Idade: ' + pet.idade!.toString()),
-    //             Text('Peso: ' + pet.peso!.toString()),
-    //             Text('Ração: ' + pet.racao!),
-    //             Text('Tamanho das Porções: ' + pet.tamanhoPorcoes!.toString()),
-    //             Text('Dieta: ' + ((pet.dieta! == 1) ? 'Sim' : 'Não')),
-    //           ],
-    //         )),
-    //   )
-    // ]);
-    // return ListTile(
-    //   title: Text(pet.nome!),
-
-    // child: Container(
-    //             height: 120,
-    //             width: 50,
-    //             decoration: BoxDecoration(
-    //                 border:
-    //                     Border.all(color: Colors.deepPurple, width: 3.0)),
-    //             child: const Align(
-    //               alignment: Alignment.centerLeft,
-    //               child: Padding(
-    //                 padding: EdgeInsets.only(left: 24.0),
-    //                 child: Text(
-    //                   'Nome do Gato',
-    //                   maxLines: 1,
-    //                   textAlign: TextAlign.center,
-    //                   style: TextStyle(
-    //                     fontSize: 20,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //             // child: const Align(
-    //             //   alignment: Alignment.centerRight,
-    //             //   child: Padding(
-    //             //     padding: EdgeInsets.only(right: 24.0),
-    //             //   ),
-    //             // ) // TODO: Adicionar checkboxes no lado direito do container
-    //           ),
-    // onTap: () {
-    //   Navigator.pushReplacementNamed(context, DetalhesPet.nome)
-    // }
-    // );
   }
 
   Color getColor(Set<MaterialState> states) {
