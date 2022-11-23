@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:PetFoodPlanner/views/myapp.dart';
 import 'package:PetFoodPlanner/views/cadastro_pet.dart';
 import 'package:PetFoodPlanner/views/detalhes_pet.dart';
 import 'package:PetFoodPlanner/models/pets.dart';
@@ -191,9 +190,6 @@ class _MyHomePageState extends State<MyHomePage> {
     if (noAlimentacao == 2) alimentacao2 = value;
     if (noAlimentacao == 3) alimentacao3 = value;
 
-    List<Pets>? list =
-        result.isNotEmpty ? result.map((c) => Pets.fromMap(c)).toList() : null;
-
     Alimentacao alimentacao = Alimentacao.withA(
         pet.id!,
         DateTime.now().toString(),
@@ -201,10 +197,6 @@ class _MyHomePageState extends State<MyHomePage> {
         alimentacao2,
         alimentacao3,
         (result.isEmpty == false) ? result[0]['id'] : null);
-
-    List<Alimentacao>? listFeeding = result.isNotEmpty
-        ? result.map((c) => Alimentacao.fromMap(c)).toList()
-        : null;
 
     Map<String, dynamic> row = alimentacao.toMap();
 
@@ -236,10 +228,6 @@ class _MyHomePageState extends State<MyHomePage> {
   _getFeeding() async {
     var db = DatabaseHelper.instance;
     var result = await db.queryAllFeedingRows();
-
-    List<Alimentacao>? list = result.isNotEmpty
-        ? result.map((c) => Alimentacao.fromMap(c)).toList()
-        : null;
 
     return result;
   }

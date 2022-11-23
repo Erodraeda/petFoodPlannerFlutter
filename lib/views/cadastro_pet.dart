@@ -3,7 +3,6 @@
 import 'package:PetFoodPlanner/views/detalhes_pet.dart';
 import 'package:flutter/material.dart';
 import 'package:PetFoodPlanner/models/pets.dart';
-import 'package:PetFoodPlanner/views/myapp.dart';
 import 'package:PetFoodPlanner/views/my_homepage.dart';
 import 'package:PetFoodPlanner/util/databaseHelper.dart';
 
@@ -81,8 +80,8 @@ class _CadastrarPetState extends State<CadastrarPet> {
 
   Widget _formUI() {
     List<DropdownMenuItem<int>> menuItems = [
-      DropdownMenuItem(child: Text("Sim"), value: 1),
-      DropdownMenuItem(child: Text("Não"), value: 0),
+      DropdownMenuItem(value: 1, child: Text("Sim")),
+      DropdownMenuItem(value: 0, child: Text("Não")),
     ];
 
     return Column(
@@ -105,7 +104,7 @@ class _CadastrarPetState extends State<CadastrarPet> {
           maxLength: 10,
         ),
         DropdownButtonFormField(
-          value: dieta!,
+          decoration: const InputDecoration(hintText: 'Dieta?'),
           onChanged: (int? newValue) {
             setState(() {
               pet?.dieta = newValue!;

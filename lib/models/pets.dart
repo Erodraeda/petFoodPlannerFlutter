@@ -20,13 +20,17 @@ class Pets {
   }
 
   Map<String, dynamic> toMap() {
+    var coeff = (peso! > 2) ? 3 : 1;
+
+    var tamanhoPorcao = (((peso! * 1000) * 0.05) - dieta! * 5) / coeff;
+
     Map<String, dynamic> map = {
       'nome': nome,
       'peso': peso,
       'idade': idade,
       'dieta': dieta,
       'racao': racao,
-      'tamanhoPorcoes': (((peso! * 1000) * 0.05) - dieta! * 5)
+      'tamanhoPorcoes': tamanhoPorcao
     };
     if (id != null) {
       map['id'] = id;
