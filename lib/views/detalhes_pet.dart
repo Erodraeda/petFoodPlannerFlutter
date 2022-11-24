@@ -121,6 +121,23 @@ class _DetalhesPetState extends State<DetalhesPet> {
                       ),
                     ),
                   ),
+                  Expanded(
+                      child: Align(
+                          child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.deepPurple,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          _confirmDialog(pet);
+                        },
+                      ),
+                    ],
+                  ))),
                 ],
               ),
             ),
@@ -150,6 +167,12 @@ class _DetalhesPetState extends State<DetalhesPet> {
         result.isNotEmpty ? result.map((c) => Pets.fromMap(c)).toList() : null;
 
     return list!;
+  }
+
+  _delete(int? petID) async {
+    var db = DatabaseHelper.instance;
+    await db.delete(petID!);
+    _voltarDialog();
   }
 
   Widget _buildMenu() {
@@ -182,6 +205,53 @@ class _DetalhesPetState extends State<DetalhesPet> {
               }),
         ],
       ),
+    );
+  }
+
+  _confirmDialog(Pets? pet) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+              title: const Text('Aviso!'),
+              content:
+                  Text('Você tem certeza que quer deletar o pet ${pet!.nome}'),
+              actions: [
+                TextButton(
+                  child: Text('Confirmar'),
+                  onPressed: () {
+                    _delete(pet.id);
+                  },
+                ),
+                TextButton(
+                  child: Text('Cancelar'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ]);
+        });
+  }
+
+  _voltarDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Detalhes de pet'),
+          content: const Text('Pet deletado com sucesso! :c'),
+          actions: [
+            TextButton(
+              child: const Text('Voltar para a tela inicial'),
+              onPressed: () {
+                Navigator.pushNamed(context, DetalhesPet.nomeRota);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
