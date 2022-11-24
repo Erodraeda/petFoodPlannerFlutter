@@ -1,13 +1,11 @@
 class Pets {
   int? id;
   String? nome;
-  int? peso;
-  String? idade;
-  bool? dieta;
-  List<String>? doencas;
+  double? peso;
+  int? idade;
+  int? dieta;
   String? racao;
-  int? porcoes;
-  int? tamanhoPorcoes;
+  double? tamanhoPorcoes;
 
   Pets();
 
@@ -17,22 +15,22 @@ class Pets {
     peso = map['peso'];
     idade = map['idade'];
     dieta = map['dieta'];
-    doencas = map['doencas'];
     racao = map['racao'];
-    porcoes = map['porcoes'];
     tamanhoPorcoes = map['tamanhoPorcoes'];
   }
 
   Map<String, dynamic> toMap() {
+    var coeff = (peso! > 2) ? 3 : 1;
+
+    var tamanhoPorcao = (((peso! * 1000) * 0.05) - dieta! * 5) / coeff;
+
     Map<String, dynamic> map = {
       'nome': nome,
       'peso': peso,
       'idade': idade,
       'dieta': dieta,
-      'doencas': doencas,
       'racao': racao,
-      'porcoes': porcoes,
-      'tamanhoPorcoes': tamanhoPorcoes,
+      'tamanhoPorcoes': tamanhoPorcao
     };
     if (id != null) {
       map['id'] = id;
@@ -42,7 +40,6 @@ class Pets {
 
   @override
   String toString() {
-    return ("Id: $id, Nome: $nome, Peso: $peso, Idade: $idade, Dieta: $dieta, Doenças: $doencas, Ração: $racao, Porções: $porcoes, Tamanho das Porções: $tamanhoPorcoes");
+    return ("Id: $id, Nome: $nome, Peso: $peso, Idade: $idade, Dieta: $dieta, Ração: $racao, Tamanho das Porções: $tamanhoPorcoes");
   }
-
 }
